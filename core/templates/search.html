@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %} Search {% endblock %}
+{% block content %}
+ I am Dashboards
+{% endblock %}
+
+{% block javascript %}
+  <script>
+    $(document).ready(function(){
+      $("#searchbutton").click(function(){
+          var username = $("#targeturl").val();
+          var token = '{{csrf_token}}';
+          $.ajax({
+            headers: { "X-CSRFToken": token },
+            url: '/ajaxtest/',
+            type: "POST",
+            data: {
+              'val': username
+            },
+            dataType: 'json',
+            success: function (data) {
+              alert(data.ajaxdata) ;
+            }
+          });
+      });
+    });
+  </script>
+{% endblock %}
